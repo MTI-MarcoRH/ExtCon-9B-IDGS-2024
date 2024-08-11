@@ -15,6 +15,13 @@ CREATE TABLE tbd_horarios (
     Empleado_ID INT UNSIGNED NOT NULL,
     Sucursal_ID INT UNSIGNED NOT NULL,
     Servicio_ID INT UNSIGNED NOT NULL,
-    Estatus BIT(1) NOT NULL DEFAULT b'1',
+    Estatus bit(1) NOT NULL,
     Fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    Fecha_actualizacion DATETIME DEFAULT NULL);
+    Fecha_actualizacion DATETIME DEFAULT NULL,
+    KEY Empleado_ID_idx (Empleado_ID),
+    KEY Sucursal_ID_idx (Sucursal_ID),
+    KEY Servicio_ID_idx (Servicio_ID),
+    CONSTRAINT FK_Empleado_ID FOREIGN KEY (Empleado_ID) REFERENCES tbb_empleados(ID),
+    CONSTRAINT FK_Sucursal_ID FOREIGN KEY (Sucursal_ID) REFERENCES tbc_sucursales(ID),
+    CONSTRAINT FK_Servicio_ID FOREIGN KEY (Servicio_ID) REFERENCES tbd_servicios_sucursales(ID)
+);
