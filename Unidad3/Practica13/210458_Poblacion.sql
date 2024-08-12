@@ -1,3 +1,9 @@
+--Elaborado por: Jorge Cazarez Cruz
+--Grado y Grupo: 9°B
+--Programa Educativo: Ingenieria de Desarrollo de Software.
+--Fecha elaboracion: 10 de Julio del 2024.
+
+
 CREATE DEFINER=`jorge`@`%` PROCEDURE `sp_poblar_instructor`()
 BEGIN
 IF v_password = "xYz$123" THEN
