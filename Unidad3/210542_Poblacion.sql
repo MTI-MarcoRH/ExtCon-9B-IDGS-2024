@@ -1,37 +1,59 @@
--- Poblacion opiniones clientes
-INSERT INTO tbd_opiniones_clientes (usuario_id, descripcion, tipo, respuesta, estatus, registro_fecha, Atencion_personal)
-VALUES 
-(5, 'Opinión sobre la calidad de las máquinas de entrenamiento', 'Equipo', 'Las máquinas están en excelente estado', 'Atendida', NOW(), 20),
-(5, 'Satisfacción con las clases de yoga', 'Clases', 'Las clases de yoga son muy relajantes y efectivas', 'Atendida', NOW(), 21),
-(1, 'Comentario sobre la limpieza de las instalaciones', 'Instalaciones', 'Las instalaciones están siempre limpias y ordenadas', 'Registrado', NOW(), 22),
-(2, 'Sugerencia para añadir más pesas libres', 'Equipo', 'Sería ideal contar con más pesas libres para entrenamientos de fuerza', 'Cancelado', NOW(), 23),
-(3, 'Opinión sobre el trato del personal', 'Servicio', 'El personal es muy amable y siempre dispuesto a ayudar', 'Atendida', NOW(), 24);
+-- sp_poblar_opiniones_clientes
+CREATE DEFINER=`dulce`@`%` PROCEDURE `sp_poblar_opiniones_clientes`(v_password VARCHAR(20))
+BEGIN  
+	
+    IF v_password = "xYz$123" THEN
+		
+		INSERT INTO tbd_opiniones_clientes (id, usuario_id, descripcion, tipo, respuesta, estatus, registro_fecha, registro_actualizacion, Atencion_personal) VALUES
+        (default, 5, 'Buena atención y equipo en buen estado', 'Opinión', NULL, 'Registrado', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 15),
+        (default, 2, 'El personal es muy atento y profesional', 'Opinión', NULL, 'Registrado', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 12),
+        (default, 5, 'Las instalaciones necesitan más mantenimiento', 'Queja', NULL, 'Registrado', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 13),
+        (default, 3, 'Gran variedad de clases y horarios', 'Opinión', NULL, 'Registrado', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 31),
+        (default, 1, 'Podrían mejorar el servicio de limpieza', 'Queja', NULL, 'Registrado', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 17);
+        
+        UPDATE tbd_opiniones_clientes SET estatus = 'Atendida' WHERE estatus = 'Registrado';
+        
+        DELETE FROM tbd_opiniones_clientes WHERE estatus = 'Atendida';
+        
+    ELSE 
+      SELECT "La contraseña es incorrecta, no puedo mostrarte el estatus de la Base de Datos" AS ErrorMessage;
+    
+    END IF;
+
+END
 
 
-SELECT * FROM tbi_bitacora;
-select * from tbd_opiniones_clientes;
 
-UPDATE tbd_opiniones_clientes 
-SET descripcion = 'Descripciónnn modificada', estatus = 'Registrado' 
-WHERE id = 36;
+-- sp_poblar_preguntas
+CREATE DEFINER=`dulce`@`%` PROCEDURE `sp_poblar_preguntas`(v_password VARCHAR(20))
+BEGIN  
+    -- Verificar la contraseña
+    IF v_password = "xYz$123" THEN
 
-DELETE FROM tbd_opiniones_clientes WHERE id = 34;
-
-
-
--- Poblacion de tbd_preguntas
-INSERT INTO tbd_preguntas (pregunta, respuesta, categoria, persona_id, estatus) 
-VALUES 
-('¿Cuál es tu objetivo principal en el gimnasio?', 'Perder peso', 'Objetivos', 11, 'Pendiente'),
-('¿Qué tipo de entrenamiento prefieres?', 'Entrenamiento de fuerza', 'Preferencias', 13, 'Pendiente'),
-('¿Cuántas veces a la semana entrenas?', '4 veces', 'Rutina', 14, 'Pendiente'),
-('¿Tienes alguna lesión que debamos conocer?', 'No', 'Salud', 15, 'Pendiente'),
-('¿Qué hora del día prefieres para entrenar?', 'Mañana', 'Preferencias', 16, 'Pendiente');
-
-
-UPDATE tbd_preguntas 
-SET respuesta = 'Perder peso', estatus = 'Pendiente' 
-WHERE id = 2;
-select * from tbd_preguntas;
-DELETE FROM tbd_preguntas 
-WHERE id = 4;
+        -- Insertar preguntas
+        INSERT INTO tbd_preguntas (pregunta, respuesta, categoria, persona_id, estatus) 
+        VALUES 
+        ('¿Qué horario prefiere para entrenar?', 'Mañana', 'Preferencias', 42, 'Pendiente'),
+        ('¿Está satisfecho con los servicios del gimnasio?', 'Sí', 'Satisfacción', 40, 'Pendiente'),
+        ('¿Recomendaría el gimnasio a otros?', 'Sí', 'Recomendación', 45, 'Pendiente');
+        
+        -- Actualizar la categoría de una pregunta específica
+        UPDATE tbd_preguntas 
+        SET categoria = 'Experiencia' 
+        WHERE pregunta = '¿Está satisfecho con los servicios del gimnasio?';
+        
+        -- Desactivar (cambiar el estatus) de una pregunta específica
+        UPDATE tbd_preguntas 
+        SET estatus = 'Pendiente' 
+        WHERE pregunta = '¿Qué horario prefiere para entrenar?';
+        
+        -- Eliminar una pregunta específica
+        DELETE FROM tbd_preguntas 
+        WHERE pregunta = '¿Recomendaría el gimnasio a otros?';
+        
+    ELSE 
+        -- Mensaje de error si la contraseña es incorrecta
+        SELECT "La contraseña es incorrecta, no puedo realizar modificaciones en la Base de Datos" AS ErrorMessage;
+    
+    END IF;
+END
