@@ -1,10 +1,10 @@
 -- PRACTICA 13: REVISION Y CORRECCION DE LAS TABLAS:
 --Servicios al cliente, Servicio Sucursales, Instalaciones, Equipamientos y Ejercicios.
 
---Elaborado por: Suri Jazmin Peña Lira.
+--Elaborado por: Jorge Cazarez Cruz
 --Grado y Grupo: 9°B
 --Programa Educativo: Ingenieria de Desarrollo de Software.
---Fecha elaboracion: 19 de Julio del 2024.
+--Fecha elaboracion: 10 de Julio del 2024.
 
 -- SERVICIOS AL CLIENTE 
 -- a) Revision de la composicion de la tabla.
