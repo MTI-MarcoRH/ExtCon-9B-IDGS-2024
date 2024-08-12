@@ -67,7 +67,7 @@ if v_password = '1234' then
 (default, 4, "Sugerencia", "Ampliación de horarios", "El cliente sugiere extender el horario de atención", default, default, default);
 
       
-	update tbc_servicios_clientes set Tipo_Servicio = 'Reclamo' where id = 4;
+	update tbc_servicios_clientes set Tipo_Servicio = 'Sugerencia' where id = 1;
 	update tbc_servicios_clientes set Estatus = b'0' where id = 2;
         
         delete from tbc_servicios_clientes where id = 3;
@@ -299,15 +299,16 @@ BEGIN
 
 if v_password = 'qwerty' then
 
-    INSERT INTO tbb_instalaciones VALUES
-    (Default, 'Zona de relajacion', "Zona con areas de masaje para la recuperación muscular", "Recuperación", '2020-08-10 08:00:00', default, default, default,1,"Lunes a Viernes de 8:00am a 8:00pm", null, null),
-    (Default, 'Baños de vapor', "Zona de duchas despues del entrenamiento", "Recuperación",'2020-08-10 08:00:00', default, default, default,1,"Lunes a Viernes de 8:00am a 8:00pm", null, null),
-    (Default, 'Yoga', "Espacio para ejercicios de yoga", "Ejercicios de estiramiento", '2020-08-10 08:00:00', default, default, default,1,"Lunes a Viernes de 8:00am a 8:00pm", null, null),
-    (Default, 'Pilates', "Espacio para ejercicios de pilates", "Ejercicios de tinificación", '2020-08-10 08:00:00', default, default, default,1,"Lunes a Viernes de 8:00am a 8:00pm", null, null),
-    (Default, 'Cardio', "Espacio con equipo enfocado a cardio", "Ejercicicos de rendimiento", '2020-08-10 08:00:00', default, default, default,1,"Lunes a Viernes de 8:00am a 8:00pm", null, null);
-    
-		update tbb_instalaciones set Nombre = 'Zona de pilates' where id = 4;        
-        delete from tbb_instalaciones where id = 5;
+INSERT INTO tbb_instalaciones VALUES
+    (Default, 'Área de relajación', 'Espacio con áreas para masajes y descanso', 'Relajación', '2023-09-15 09:00:00', default, default, default, 1, 'Lunes a Viernes de 9:00am a 9:00pm', null, null),
+    (Default, 'Saunas', 'Área de saunas después del ejercicio', 'Recuperación', '2023-09-15 09:00:00', default, default, default, 1, 'Lunes a Viernes de 9:00am a 9:00pm', null, null),
+    (Default, 'Sala de Yoga', 'Espacio dedicado a clases de yoga', 'Estiramiento', '2023-09-15 09:00:00', default, default, default, 1, 'Lunes a Viernes de 9:00am a 9:00pm', null, null),
+    (Default, 'Estudio de Pilates', 'Área para clases de pilates', 'Fortalecimiento', '2023-09-15 09:00:00', default, default, default, 1, 'Lunes a Viernes de 9:00am a 9:00pm', null, null),
+    (Default, 'Zona de Cardio', 'Área equipada con máquinas de cardio', 'Rendimiento', '2023-09-15 09:00:00', default, default, default, 1, 'Lunes a Viernes de 9:00am a 9:00pm', null, null);
+
+
+		update tbb_instalaciones set Nombre = 'Regaderas' where id = 2;        
+        delete from tbb_instalaciones where id = 1;
 		else
 		select "La contraseña es incorrecta, no puedo insertar registros de la BD" as Mensaje;
 	end if;
@@ -341,15 +342,17 @@ CREATE TABLE `tbb_equipamientos` (
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_poblar_equipamientos`(v_password varchar(10))
 BEGIN
 if v_password = 'qwerty' then
-    INSERT INTO tbb_equipamientos VALUES
-    (Default, 'Cardio', "Bicicleta estática", "Schwinn 170 Upright Bike.", "Mgr-123", null, '2020-08-10 08:00:00', default, default, default),
-    (Default, 'Pilates', "Mancuernas", "Bowflex SelectTech 552 Dumbbells.", "Mgr-123", null, '2020-08-10 08:00:00', default, default, default),
-    (Default, 'Yoga', "Prensa de piernas", "Body-Solid Leg Press & Hack Squat GLPH1100.", "Mgr-123", null, '2020-08-10 08:00:00', default, default, default),
-    (Default, 'Olimpico', "Barras paralelas", "Lebert Equalizer Bars.", "Mgr-123", null, '2020-08-10 08:00:00', default, default, default),
-    (Default, 'Estiramiento y Flexibilidad', "Barras de estiramiento", "ProStretch Plus Calf Stretcher.", "MDL-123", null, '2020-08-10 08:00:00', default, default, default);
-	
-		update tbb_equipamientos set Area = 'Yoga post-parto' where id = 3;        
-        delete from tbb_equipamientos where id = 5;
+
+INSERT INTO tbb_equipamientos VALUES
+    (Default, 'Cardio', 'Cinta de correr', 'NordicTrack T Series Treadmill.', 'Crd-456', null, '2023-11-01 09:00:00', default, default, default),
+    (Default, 'Pilates', 'Fitball', 'ProForm Exercise Ball.', 'Plt-456', null, '2023-11-01 09:00:00', default, default, default),
+    (Default, 'Yoga', 'Colchoneta', 'Liforme Yoga Mat.', 'Yga-456', null, '2023-11-01 09:00:00', default, default, default),
+    (Default, 'Olimpico', 'Kettlebells', 'Rogue Kettlebells.', 'Omp-456', null, '2023-11-01 09:00:00', default, default, default),
+    (Default, 'Estiramiento y Flexibilidad', 'Rodillo de espuma', 'TriggerPoint Grid Foam Roller.', 'Efl-456', null, '2023-11-01 09:00:00', default, default, default);
+
+
+		update tbb_equipamientos set Area = 'Calistenia' where id = 3;        
+        delete from tbb_equipamientos where id = 2;
 		else
 		select "La contraseña es incorrecta, no puedo insertar registros de la BD" as Mensaje;
 	end if;
