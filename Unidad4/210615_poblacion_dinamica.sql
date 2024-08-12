@@ -3,4 +3,4 @@
 --Programa Educativo: Ingenieria de Desarrollo de Software.
 
 -- Consultas sql para la población dinamica
-call sp_poblar_programas_saludables('1234');
+call sp_inserta_programa_saludable (5);
