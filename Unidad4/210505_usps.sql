@@ -24,7 +24,7 @@ BEGIN
 			DEFAULT,
             fn_numero_aleatorio(1,2),
             fn_genera_monto_aleatorio(100.0, 2000.0),
-            DEFAULT,
+            fn_numero_aleatorio(0,1),
             fecha_transaccion,
             fecha_actualizacion,
             usuario_id
