@@ -3,33 +3,43 @@
 -- Programa Educativo: Ingenieria en Desarrollo y Gestion de Software
 -- Fecha elaboracion: 12 de agosto 2024
 
-CREATE DEFINER=`ame`@`%` PROCEDURE `sp_inserta_transacciones`(v_cantidad INT)
+CREATE DEFINER=`ame`@`%` PROCEDURE `sp_inserta_preguntas_nutricionales`(v_cantidad INT)
 BEGIN
-	DECLARE i INT DEFAULT 0;
-    DECLARE fecha_transaccion DATETIME;
+    DECLARE i INT DEFAULT 0;
+    DECLARE fecha_creacion DATETIME;
     DECLARE fecha_actualizacion DATETIME;
-    DECLARE usuario_id INT;
-    
-	WHILE i < v_cantidad DO
-		SET fecha_transaccion = fn_genera_fechahora('2024-01-01', CURDATE(), '00:00:00', CURTIME());
-        IF DATE(fecha_transaccion) < CURDATE() THEN 
-			SET fecha_actualizacion = fn_genera_fechahora(fecha_transaccion, CURDATE(), '00:00:00', CURTIME());
-		ELSE
-			SET fecha_actualizacion = NULL;
+
+    WHILE i < v_cantidad DO
+        -- Genera la fecha de creación aleatoria
+        SET fecha_creacion = fn_fecha_creacion_aleatoria('2024-01-01', CURDATE());
+
+        -- Genera la fecha de actualización aleatoria si la fecha de creación es anterior a la fecha actual
+        IF DATE(fecha_creacion) < CURDATE() THEN 
+            SET fecha_actualizacion = fn_fecha_creacion_aleatoria(fecha_creacion, CURDATE());
+        ELSE
+            SET fecha_actualizacion = NULL;
         END IF;
-        
-        SET usuario_id = (SELECT ID FROM tbb_usuarios ORDER BY RAND() LIMIT 1);
-        
-		INSERT INTO tbb_transacciones VALUES(
-			DEFAULT,
-            fn_numero_aleatorio(1,2),
-            fn_genera_monto_aleatorio(100.0, 2000.0),
-            fn_numero_aleatorio(0,1),
-            fecha_transaccion,
+
+        -- Inserta una nueva pregunta nutricional en la tabla
+        INSERT INTO preguntas_nutricionales (
+            Pregunta, 
+            Tipo_Respuesta, 
+            Descripcion, 
+            Fecha_Creacion, 
+            Fecha_Actualizacion, 
+            Estatus, 
+            Opciones_Respuesta
+        ) VALUES (
+            fn_pregunta_aleatoria(),
+            fn_tipo_respuesta_aleatorio(),
+            'Descripción generada automáticamente.',
+            fecha_creacion,
             fecha_actualizacion,
-            usuario_id
-		);
-        
-		SET i = i + 1;
+            fn_estatus_aleatorio(),
+            IF(fn_tipo_respuesta_aleatorio() = 'Cerrada', 'Sí;No', NULL)
+        );
+
+        -- Incrementa el contador
+        SET i = i + 1;
     END WHILE;
-END
+END;

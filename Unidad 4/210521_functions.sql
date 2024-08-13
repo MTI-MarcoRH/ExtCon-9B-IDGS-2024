@@ -3,40 +3,69 @@
 -- Programa Educativo: Ingenieria en Desarrollo y Gestion de Software
 -- Fecha elaboracion: 12 de agosto 2024
 
--- Función para generar un numero aleatorio a partir de un rango de números
-CREATE DEFINER=`ame`@`%` FUNCTION `fn_numero_aleatorio`(v_limite_inferior int, v_limite_superior int) RETURNS int
-    DETERMINISTIC
-BEGIN	
-	declare v_numero_generado INT 
-    default floor(Rand()* (v_limite_superior - v_limite_inferior + 1) + v_limite_inferior);
-    SET @numero_generado = v_numero_generado;
-RETURN v_numero_generado;
-END
 
--- Función para generar un monto aleatorio a partir de un rango de montos
-CREATE DEFINER=`ame`@`%` FUNCTION `fn_genera_monto_aleatorio`(v_limite_inferior FLOAT, v_limite_superior FLOAT) RETURNS float
+-- Función para generar una pregunta aleatoria
+CREATE DEFINER=`ame`@`%` FUNCTION `fn_pregunta_aleatoria`() RETURNS VARCHAR(255)
     DETERMINISTIC
 BEGIN
-	DECLARE monto_aleatorio FLOAT;
-    SET monto_aleatorio = v_limite_inferior + (v_limite_superior - v_limite_inferior) * RAND();
-    RETURN monto_aleatorio;
-END
+    DECLARE v_pregunta VARCHAR(255);
 
+    SET v_pregunta = (SELECT Pregunta FROM (
+        SELECT '¿Cuántas porciones de frutas consumes al día?' AS Pregunta
+        UNION
+        SELECT '¿Cuántos vasos de agua bebes diariamente?' 
+        UNION
+        SELECT '¿Consumes alimentos ricos en fibra?'
+        UNION
+        SELECT '¿Cuántas veces a la semana consumes comida rápida?'
+        UNION
+        SELECT '¿Incluyes proteínas en tus comidas?'
+    ) AS Preguntas ORDER BY RAND() LIMIT 1);
 
-CREATE DEFINER=`ame`@`%` FUNCTION `fn_genera_fechahora`(v_fechaInicio DATE, v_fechaFin DATE, v_horaInicio TIME, v_horaFin TIME) RETURNS datetime
+    RETURN v_pregunta;
+END;
+
+-- Función para generar el tipo de respuesta aleatorio
+CREATE DEFINER=`ame`@`%` FUNCTION `fn_tipo_respuesta_aleatorio`() RETURNS ENUM('Abierta', 'Cerrada')
     DETERMINISTIC
 BEGIN
-	DECLARE fechaAleatoria DATE;
-    DECLARE horaRegistro TIME;
-	DECLARE fechaHoraGenerada DATETIME;
-    
-    -- Generar fecha aleatoria dentro del rango dado
-    SET fechaAleatoria = DATE_ADD(v_fechaInicio, INTERVAL FLOOR(RAND() * (DATEDIFF(v_fechaFin, v_fechaInicio) + 1)) DAY);
-    
-    -- Generar hora de registro aleatoria dentro del rango de hora de entrada y salida
-    SET horaRegistro = ADDTIME(v_horaInicio, SEC_TO_TIME(FLOOR(RAND() * TIME_TO_SEC(TIMEDIFF(v_horaFin, v_horaInicio)))));
-    
-    SET fechaHoraGenerada = CONCAT(fechaAleatoria, " ", horaRegistro);
-    
-    RETURN fechaHoraGenerada;
-END
+    DECLARE v_tipo_respuesta ENUM('Abierta', 'Cerrada');
+
+    SET v_tipo_respuesta = IF(FLOOR(RAND()*2) = 0, 'Abierta', 'Cerrada');
+
+    RETURN v_tipo_respuesta;
+END;
+
+-- Función para generar una fecha de creación aleatoria dentro de un rango
+CREATE DEFINER=`ame`@`%` FUNCTION `fn_fecha_creacion_aleatoria`(v_fechaInicio DATE, v_fechaFin DATE) RETURNS DATETIME
+    DETERMINISTIC
+BEGIN
+    DECLARE v_fecha_creacion DATETIME;
+
+    SET v_fecha_creacion = DATE_ADD(v_fechaInicio, INTERVAL FLOOR(RAND() * (DATEDIFF(v_fechaFin, v_fechaInicio) + 1)) DAY);
+
+    RETURN v_fecha_creacion;
+END;
+
+-- Función para generar un estado aleatorio (activo o inactivo)
+CREATE DEFINER=`ame`@`%` FUNCTION `fn_estatus_aleatorio`() RETURNS BIT(1)
+    DETERMINISTIC
+BEGIN
+    DECLARE v_estatus BIT(1);
+
+    SET v_estatus = IF(FLOOR(RAND()*2) = 0, 0, 1);
+
+    RETURN v_estatus;
+END;
+
+-- Insertar un registro en la tabla utilizando las funciones
+INSERT INTO preguntas_nutricionales (Pregunta, Tipo_Respuesta, Descripcion, Fecha_Creacion, Fecha_Actualizacion, Estatus, Opciones_Respuesta)
+VALUES (
+    fn_pregunta_aleatoria(),
+    fn_tipo_respuesta_aleatorio(),
+    'Descripción generada automáticamente.',
+    fn_fecha_creacion_aleatoria('2023-01-01', '2024-12-31'),
+    NOW(),
+    fn_estatus_aleatorio(),
+    'Sí;No'
+);
