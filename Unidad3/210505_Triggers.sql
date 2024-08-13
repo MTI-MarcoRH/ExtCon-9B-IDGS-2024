@@ -1,5 +1,5 @@
 -- TRIGGER: AFTER INSERT
-CREATE DEFINER=`sebastian.marquez`@`%` TRIGGER `tbb_transaccion_AFTER_INSERT` AFTER INSERT ON `tbb_transaccion` FOR EACH ROW BEGIN
+CREATE DEFINER=`sebastian.marquez`@`%` TRIGGER `tbb_transacciones_AFTER_INSERT` AFTER INSERT ON `tbb_transacciones` FOR EACH ROW BEGIN
 	DECLARE v_estatus varchar(20) default 'Activo';
     
     IF not new.estatus = b'1' then
@@ -10,7 +10,7 @@ CREATE DEFINER=`sebastian.marquez`@`%` TRIGGER `tbb_transaccion_AFTER_INSERT` AF
         DEFAULT,
         USER(),
         "Create",
-        "tbb_transaccion",
+        "tbb_transacciones",
         CONCAT_WS(" ","Se ha insertado una nueva transaccion con los siguientes datos: ",
         "ID = ", NEW.ID,
         "METODO_PAGO = ", NEW.Metodo_Pago,
@@ -24,12 +24,12 @@ CREATE DEFINER=`sebastian.marquez`@`%` TRIGGER `tbb_transaccion_AFTER_INSERT` AF
 END
 
 -- TRIGGER: BEFORE UPDATE
-CREATE DEFINER=`sebastian.marquez`@`%` TRIGGER `tbb_transaccion_BEFORE_UPDATE` BEFORE UPDATE ON `tbb_transaccion` FOR EACH ROW BEGIN
+CREATE DEFINER=`sebastian.marquez`@`%` TRIGGER `tbb_transacciones_BEFORE_UPDATE` BEFORE UPDATE ON `tbb_transacciones` FOR EACH ROW BEGIN
 	SET NEW.Fecha_Actualizacion = current_timestamp();
 END
 
 -- TRIGGER: AFTER UPDATE
-CREATE DEFINER=`sebastian.marquez`@`%` TRIGGER `tbb_transaccion_AFTER_UPDATE` AFTER UPDATE ON `tbb_transaccion` FOR EACH ROW BEGIN
+CREATE DEFINER=`sebastian.marquez`@`%` TRIGGER `tbb_transacciones_AFTER_UPDATE` AFTER UPDATE ON `tbb_transacciones` FOR EACH ROW BEGIN
 	DECLARE v_estatus_old varchar(20) default 'Activo';
 	DECLARE v_estatus_new varchar(20) default 'Activo';
     
@@ -45,7 +45,7 @@ CREATE DEFINER=`sebastian.marquez`@`%` TRIGGER `tbb_transaccion_AFTER_UPDATE` AF
         DEFAULT,
         USER(),
         "Update",
-        "tbb_transaccion",
+        "tbb_transacciones",
         CONCAT_WS(" ","Se ha actualizado transaccion con los siguientes datos: ",
         "ID = ", OLD.ID, "-", NEW.ID,
         "METODO_PAGO = ", OLD.Metodo_Pago, "-", NEW.Metodo_Pago,
@@ -59,7 +59,7 @@ CREATE DEFINER=`sebastian.marquez`@`%` TRIGGER `tbb_transaccion_AFTER_UPDATE` AF
 END
 
 -- TRIGGER: AFTER DELETE
-CREATE DEFINER=`sebastian.marquez`@`%` TRIGGER `tbb_transaccion_AFTER_DELETE` AFTER DELETE ON `tbb_transaccion` FOR EACH ROW BEGIN
+CREATE DEFINER=`sebastian.marquez`@`%` TRIGGER `tbb_transacciones_AFTER_DELETE` AFTER DELETE ON `tbb_transacciones` FOR EACH ROW BEGIN
 	DECLARE v_estatus VARCHAR(20) DEFAULT 'Activo';
     
     IF NOT OLD.estatus = b'1' THEN
@@ -70,7 +70,7 @@ CREATE DEFINER=`sebastian.marquez`@`%` TRIGGER `tbb_transaccion_AFTER_DELETE` AF
         DEFAULT,
         USER(),
         "Delete",
-        "tbb_transaccion",
+        "tbb_transacciones",
         CONCAT_WS(" ","Se ha eliminado la transaccion con los siguientes datos: ", 
         "ID = ", OLD.ID,
         "METODO_PAGO = ", OLD.Metodo_Pago,
