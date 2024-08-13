@@ -1,16 +1,16 @@
 -- TABLA OPINIONES CLIENTES
 CREATE TABLE tbd_opiniones_clientes (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    usuario_id INT NOT NULL,
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,  
+    usuario_id INT UNSIGNED NOT NULL,  
     descripcion TEXT,
     tipo VARCHAR(50),
     respuesta TEXT,
     estatus ENUM('Cancelado', 'Registrado', 'Abierto','Atendida') DEFAULT 'Atendida',
     registro_fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     registro_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    Atencion_personal INT,
-    FOREIGN KEY (usuario_id) REFERENCES tbb_personas(atencion_personal),
-    FOREIGN KEY (Atencion_personal) REFERENCES tbb_usuarios(usuario_id)
+    Atencion_personal INT UNSIGNED,  
+    FOREIGN KEY (usuario_id) REFERENCES tbb_usuarios(id),  -- Clave foránea hacia tbb_usuarios
+    FOREIGN KEY (Atencion_personal) REFERENCES tbb_personas(id)  -- Clave foránea hacia tbb_personas
 );
 
 -- TABLA PREGUNTAS

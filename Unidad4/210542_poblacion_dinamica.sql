@@ -1,29 +1,29 @@
 -- sp_poblado_dinamico_opiniones_clientes
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_poblado_dinamico_opinion_cliente`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_poblado_dinamico_opiniones_clientes`()
 BEGIN
     DECLARE i INT DEFAULT 1;
     DECLARE v_usuario_id INT;
     DECLARE v_descripcion TEXT;
     DECLARE v_tipo VARCHAR(50);
     DECLARE v_respuesta TEXT;
-    DECLARE v_estatus BIT(1);
+    DECLARE v_estatus ENUM('Cancelado', 'Registrado', 'Abierto','Atendida');
     DECLARE v_registro_fecha DATETIME;
     DECLARE v_registro_actualizacion DATETIME;
     DECLARE v_Atencion_personal INT;
 
     WHILE i <= 200 DO
         -- Generar datos aleatorios
-        SET v_usuario_id = (SELECT usuario_id FROM tbb_usuarios ORDER BY RAND() LIMIT 1);
-        SET v_Atencion_personal = (SELECT id FROM tbb_atencion_personal ORDER BY RAND() LIMIT 1);
+        SET v_usuario_id = (SELECT id FROM tbb_usuarios ORDER BY RAND() LIMIT 1);
+        SET v_Atencion_personal = (SELECT id FROM tbb_personas ORDER BY RAND() LIMIT 1);
         SET v_descripcion = fn_genera_descripcion_opinion();
         SET v_tipo = fn_genera_tipo_opinion();
         SET v_respuesta = fn_genera_respuesta_opinion();
-        SET v_estatus = fn_genera_estatus_opinion();
+        SET v_estatus = 'Registrado';  -- Cambiado para usar un valor válido del ENUM
         SET v_registro_fecha = NOW();
         SET v_registro_actualizacion = NOW();
 
-        -- Insertar en la tabla opinion_cliente
-        INSERT INTO opinion_cliente (
+        -- Insertar en la tabla tbd_opiniones_clientes
+        INSERT INTO tbd_opiniones_clientes (
             usuario_id,
             descripcion,
             tipo,
@@ -47,7 +47,7 @@ BEGIN
         -- Incrementar el contador
         SET i = i + 1;
     END WHILE;
-END;
+END
 
 
 -- *************************************************
@@ -59,7 +59,7 @@ BEGIN
     DECLARE v_respuesta TEXT;
     DECLARE v_categoria VARCHAR(255);
     DECLARE v_persona_id INT;
-    DECLARE v_estatus ENUM('Atendida', 'Registratada', 'Cancelada', 'Pendiente');
+    DECLARE v_estatus ENUM('Atendida', 'Registrada', 'Cancelada', 'Pendiente');
     DECLARE v_fecha_creacion DATETIME;
     DECLARE v_fecha_actualizacion DATETIME;
 
@@ -67,9 +67,9 @@ BEGIN
     WHILE i <= 200 DO
         -- Generar datos aleatorios
         SET v_pregunta = fn_genera_pregunta();
-        SET v_respuesta = fn_genera_respuesta();
-        SET v_categoria = fn_genera_categoria();
-        SET v_persona_id = fn_genera_persona_id();  -- Selecciona un ID válido de la tabla relacionada
+        SET v_respuesta = fn_genera_respuesta_pregunta();
+        SET v_categoria = fn_genera_categoria_pregunta();
+        SET v_persona_id = fn_genera_persona_id_pregunta();  -- Selecciona un ID válido de la tabla relacionada
         SET v_estatus = fn_genera_estatus_pregunta();
         SET v_fecha_creacion = NOW();
         SET v_fecha_actualizacion = NOW();
@@ -97,4 +97,4 @@ BEGIN
         -- Incrementar el contador
         SET i = i + 1;
     END WHILE;
-END;
+END

@@ -1,31 +1,35 @@
 -- sp_poblar_opiniones_clientes
-CREATE DEFINER=`dulce`@`%` PROCEDURE `sp_poblar_opiniones_clientes`(v_password VARCHAR(20))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_poblar_opiniones_clientes`(v_password VARCHAR(20))
 BEGIN  
-	
     IF v_password = "xYz$123" THEN
 		
-		INSERT INTO tbd_opiniones_clientes (id, usuario_id, descripcion, tipo, respuesta, estatus, registro_fecha, registro_actualizacion, Atencion_personal) VALUES
-        (default, 5, 'Buena atención y equipo en buen estado', 'Opinión', NULL, 'Registrado', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 15),
-        (default, 2, 'El personal es muy atento y profesional', 'Opinión', NULL, 'Registrado', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 12),
-        (default, 5, 'Las instalaciones necesitan más mantenimiento', 'Queja', NULL, 'Registrado', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 13),
-        (default, 3, 'Gran variedad de clases y horarios', 'Opinión', NULL, 'Registrado', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 31),
-        (default, 1, 'Podrían mejorar el servicio de limpieza', 'Queja', NULL, 'Registrado', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 17);
+        -- Inserta registros en la tabla tbd_opiniones_clientes
+		INSERT INTO tbd_opiniones_clientes (usuario_id, descripcion, tipo, respuesta, estatus, registro_fecha, registro_actualizacion, Atencion_personal) VALUES
+        (5, 'Buena atención y equipo en buen estado', 'Opinión', NULL, 'Registrado', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 15),
+        (2, 'El personal es muy atento y profesional', 'Opinión', NULL, 'Registrado', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 12),
+        (5, 'Las instalaciones necesitan más mantenimiento', 'Queja', NULL, 'Registrado', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 13),
+        (3, 'Gran variedad de clases y horarios', 'Opinión', NULL, 'Registrado', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 31),
+        (1, 'Podrían mejorar el servicio de limpieza', 'Queja', NULL, 'Registrado', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 17);
         
-        UPDATE tbd_opiniones_clientes SET estatus = 'Atendida' WHERE estatus = 'Registrado';
+        -- Actualiza registros donde el estatus es 'Registrado' a 'Atendida'
+        UPDATE tbd_opiniones_clientes 
+        SET estatus = 'Atendida' 
+        WHERE estatus = 'Registrado';
         
-        DELETE FROM tbd_opiniones_clientes WHERE estatus = 'Atendida';
+        -- Elimina registros donde el estatus es 'Atendida'
+       DELETE FROM tbd_opiniones_clientes 
+		WHERE estatus = 'Atendida' AND usuario_id = 14;  -- Ajusta la condición según sea necesario
+
         
     ELSE 
-      SELECT "La contraseña es incorrecta, no puedo mostrarte el estatus de la Base de Datos" AS ErrorMessage;
-    
+        -- Muestra un mensaje de error si la contraseña es incorrecta
+        SELECT "La contraseña es incorrecta, no puedo mostrarte el estatus de la Base de Datos" AS ErrorMessage;
     END IF;
-
 END
 
 
-
 -- sp_poblar_preguntas
-CREATE DEFINER=`dulce`@`%` PROCEDURE `sp_poblar_preguntas`(v_password VARCHAR(20))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_poblar_preguntas`(v_password VARCHAR(20))
 BEGIN  
     -- Verificar la contraseña
     IF v_password = "xYz$123" THEN
