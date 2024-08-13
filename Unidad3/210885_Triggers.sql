@@ -1,4 +1,7 @@
 -- TABLA tbd_evaluaciones_servicios
+-- ELABORADO POR: Maria Lorena Ascencion Andres
+--GRADO Y GRUPO: 9°'B'
+--PROGRAMA EDUCATIVO: Ingeniería en Desarrollo y Gestión de Software
 
 -- ------- AFTER INSERT 
 CREATE DEFINER=`lorena`@`%` TRIGGER `tbd_evaluaciones_servicios_AFTER_INSERT` AFTER INSERT ON `tbd_evaluaciones_servicios` FOR EACH ROW BEGIN

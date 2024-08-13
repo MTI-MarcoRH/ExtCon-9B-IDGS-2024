@@ -1,5 +1,7 @@
 -- TABLA tbd_evaluaciones_servicios
-
+-- ELABORADO POR: Maria Lorena Ascencion Andres
+--GRADO Y GRUPO: 9°'B'
+--PROGRAMA EDUCATIVO: Ingeniería en Desarrollo y Gestión de Software
 
 CREATE TABLE `tbd_evaluaciones_servicios` (
   `id` int NOT NULL AUTO_INCREMENT,

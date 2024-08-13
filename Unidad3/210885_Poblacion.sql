@@ -1,4 +1,8 @@
 -- TABLA tbd_evaluaciones_servicios
+-- ELABORADO POR: Maria Lorena Ascencion Andres
+--GRADO Y GRUPO: 9°'B'
+--PROGRAMA EDUCATIVO: Ingeniería en Desarrollo y Gestión de Software
+
 
 CREATE DEFINER=`lorena`@`%` PROCEDURE `sp_poblar_evaluaciones_servicios`(v_password VARCHAR(20))
 BEGIN  
