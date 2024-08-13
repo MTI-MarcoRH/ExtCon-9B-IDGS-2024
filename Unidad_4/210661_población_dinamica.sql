@@ -1,0 +1,1 @@
+call sp_insertar_prestamos_aleatorios(50);
