@@ -3,7 +3,7 @@
 -- Programa Educativo: Ingenieria en Desarrollo y Gestion de Software
 -- Fecha elaboracion: 12 de agosto 2024
 
-CREATE DEFINER=`ame`@`%` PROCEDURE `sp_inserta_preguntas_nutricionales`(v_cantidad INT)
+CREATE DEFINER=`ame`@`%` PROCEDURE `sp_inserta_preguntas_nutricionales`(v_password varchar(20))
 BEGIN
     DECLARE i INT DEFAULT 0;
     DECLARE fecha_creacion DATETIME;
