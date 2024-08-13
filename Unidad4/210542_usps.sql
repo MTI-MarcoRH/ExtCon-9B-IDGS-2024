@@ -1,5 +1,11 @@
+-- Elaborado por: Dulce Esmeralda Hernández Juárez 210542
+-- Grado y Grupo: 9° B
+-- Programa Educativo: Ingeniería de Desarrollo y Gestión de Software
+-- Fecha elaboración: 6 de Agosto de 2024
+-- Tabla: tbd_opiniones_clientes
+
 -- opiniones clientes
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_manage_opiniones_clientes`(
+CREATE DEFINER=`dulce`@`%` PROCEDURE `sp_manage_opiniones_clientes`(
     IN p_action VARCHAR(10), 
     IN p_id INT, 
     IN p_usuario_id INT, 
@@ -142,8 +148,14 @@ SELECT ID FROM tbb_personas;
 SELECT ID FROM tbb_usuarios;
 SELECT ID FROM tbd_opiniones_clientes;
 -- ***********************************************
+-- Elaborado por: Dulce Esmeralda Hernández Juárez 210542
+-- Grado y Grupo: 9° B
+-- Programa Educativo: Ingeniería de Desarrollo y Gestión de Software
+-- Fecha elaboración: 6 de Agosto de 2024
+-- Tabla: tbd_preguntas
+
 -- preguntas
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_manage_preguntas`(
+CREATE DEFINER=`dulce`@`%` PROCEDURE `sp_manage_preguntas`(
     IN p_action VARCHAR(10), 
     IN p_id INT, 
     IN p_pregunta TEXT, 

@@ -1,3 +1,8 @@
+-- Elaborado por: Dulce Esmeralda Hernández Juárez 210542
+-- Grado y Grupo: 9° B
+-- Programa Educativo: Ingeniería de Desarrollo y Gestión de Software
+-- Fecha elaboración: 6 de Agosto de 2024
+-- Tabla: tbd_opiniones_clientes
 -- TRIGGERS OPINIONES CLIENTES
 -- AFTER INSERT
 CREATE DEFINER=`dulce`@`%` TRIGGER `tbd_opiniones_clientes_AFTER_INSERT` AFTER INSERT ON `tbd_opiniones_clientes` FOR EACH ROW BEGIN
@@ -118,7 +123,11 @@ CREATE DEFINER=`dulce`@`%` TRIGGER `tbd_opiniones_clientes_AFTER_DELETE` AFTER D
     );
 END
 -- --------------------------------------------------------------------------------------------------
-
+-- Elaborado por: Dulce Esmeralda Hernández Juárez 210542
+-- Grado y Grupo: 9° B
+-- Programa Educativo: Ingeniería de Desarrollo y Gestión de Software
+-- Fecha elaboración: 6 de Agosto de 2024
+-- Tabla: tbd_preguntas
 -- TRIGGERS PREGUNTAS
 -- AFTER_INSERT
 

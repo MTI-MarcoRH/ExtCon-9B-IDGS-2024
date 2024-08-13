@@ -1,5 +1,11 @@
+-- Elaborado por: Dulce Esmeralda Hernández Juárez 210542
+-- Grado y Grupo: 9° B
+-- Programa Educativo: Ingeniería de Desarrollo y Gestión de Software
+-- Fecha elaboración: 6 de Agosto de 2024
+-- Tabla: tbd_opiniones_clientes
+
 -- sp_poblado_dinamico_opiniones_clientes
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_poblado_dinamico_opiniones_clientes`()
+CREATE DEFINER=`dulce`@`%` PROCEDURE `sp_poblado_dinamico_opiniones_clientes`()
 BEGIN
     DECLARE i INT DEFAULT 1;
     DECLARE v_usuario_id INT;
@@ -51,8 +57,13 @@ END
 
 
 -- *************************************************
+-- Elaborado por: Dulce Esmeralda Hernández Juárez 210542
+-- Grado y Grupo: 9° B
+-- Programa Educativo: Ingeniería de Desarrollo y Gestión de Software
+-- Fecha elaboración: 6 de Agosto de 2024
+-- Tabla: tbd_preguntas
 -- sp_poblado_dinamico_tbd_preguntas
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_poblado_dinamico_tbd_preguntas`()
+CREATE DEFINER=`dulce`@`%` PROCEDURE `sp_poblado_dinamico_tbd_preguntas`()
 BEGIN
     DECLARE i INT DEFAULT 1;
     DECLARE v_pregunta TEXT;

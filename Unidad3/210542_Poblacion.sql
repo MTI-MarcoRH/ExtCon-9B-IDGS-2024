@@ -1,5 +1,11 @@
+-- Elaborado por: Dulce Esmeralda Hernández Juárez 210542
+-- Grado y Grupo: 9° B
+-- Programa Educativo: Ingeniería de Desarrollo y Gestión de Software
+-- Fecha elaboración: 6 de Agosto de 2024
+-- Tabla: tbd_opiniones_clientes
+
 -- sp_poblar_opiniones_clientes
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_poblar_opiniones_clientes`(v_password VARCHAR(20))
+CREATE DEFINER=`dulce`@`%` PROCEDURE `sp_poblar_opiniones_clientes`(v_password VARCHAR(20))
 BEGIN  
     IF v_password = "xYz$123" THEN
 		
@@ -26,10 +32,14 @@ BEGIN
         SELECT "La contraseña es incorrecta, no puedo mostrarte el estatus de la Base de Datos" AS ErrorMessage;
     END IF;
 END
-
-
+-- **********************************************************
+-- Elaborado por: Dulce Esmeralda Hernández Juárez 210542
+-- Grado y Grupo: 9° B
+-- Programa Educativo: Ingeniería de Desarrollo y Gestión de Software
+-- Fecha elaboración: 6 de Agosto de 2024
+-- Tabla: tbd_preguntas
 -- sp_poblar_preguntas
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_poblar_preguntas`(v_password VARCHAR(20))
+CREATE DEFINER=`dulce`@`%` PROCEDURE `sp_poblar_preguntas`(v_password VARCHAR(20))
 BEGIN  
     -- Verificar la contraseña
     IF v_password = "xYz$123" THEN
