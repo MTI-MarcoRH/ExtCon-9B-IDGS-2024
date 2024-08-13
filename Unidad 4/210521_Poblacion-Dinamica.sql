@@ -4,4 +4,4 @@
 -- Fecha elaboracion: 12 de agosto 2024
 
 -- Dependiente de la tabla de usuarios
-CALL sp_inserta_transacciones(10);
+CALL sp_inserta_preguntas_nutricionales(10);
